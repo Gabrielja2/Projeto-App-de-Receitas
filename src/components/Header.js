@@ -42,8 +42,12 @@ function Header({ title, bool, btnName }) {
 
 Header.propTypes = {
   bool: PropTypes.bool.isRequired,
-  btnName: PropTypes.string.isRequired,
+  btnName: PropTypes.string,
   title: PropTypes.string.isRequired,
+};
+
+Header.defaultProps = {
+  btnName: '',
 };
 
 export default Header;

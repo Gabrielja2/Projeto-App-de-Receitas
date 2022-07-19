@@ -6,15 +6,14 @@ import Header from '../components/Header';
 // import { DataContext } from '../context/DataContext';
 
 function Profile() {
-  const string = localStorage.getItem('user');
-  const { email } = JSON.parse(string);
+  const string = JSON.parse(localStorage.getItem('user'));
   const handleClick = () => {
     localStorage.clear();
   };
   return (
     <div>
       <Header title="Profile" bool={ false } />
-      <h3 data-testid="profile-email">{ email }</h3>
+      {string && (<h3 data-testid="profile-email">{ string.email }</h3>) }
       <Link to="/done-recipes">
         <button data-testid="profile-done-btn" type="button">Done Recipes</button>
       </Link>
