@@ -127,6 +127,14 @@ function FoodId() {
             {filteredById[0].strMeasure20}
           </li>
         </ul>
+        <div>
+          <button type="button" data-testid="share-btn">
+            Share
+          </button>
+          <button type="button" data-testid="favorite-btn">
+            Favorite
+          </button>
+        </div>
         <p data-testid="instructions">{filteredById[0].strInstructions}</p>
         <iframe
           className="w-[560px] h-[315px] rounded-lg"
