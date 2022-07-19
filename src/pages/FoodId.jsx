@@ -148,6 +148,9 @@ function FoodId() {
               </div>
             ))}
         </div>
+        <button type="button" className="btn-footer" data-testid="start-recipe-btn">
+          Start Recipe
+        </button>
       </div>
     )
   );

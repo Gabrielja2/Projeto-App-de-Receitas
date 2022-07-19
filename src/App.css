@@ -81,6 +81,11 @@
   width: 100px;
 }
 
+.btn-footer {
+  position: fixed;
+  bottom: 0px;
+}
+
 @keyframes shake {
 
   0% {
