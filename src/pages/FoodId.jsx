@@ -11,6 +11,15 @@ function FoodId() {
   const { id } = useParams();
   const url = window.location.href;
   const [copied, setCopied] = useState(false);
+  const [favorited, setFavorited] = useState({
+    id: '',
+    type: '',
+    nationality: '',
+    category: '',
+    alcoholicOrNot: '',
+    name: '',
+    image: '',
+  });
 
   useEffect(() => {
     const doFetch = async () => {
@@ -42,6 +51,29 @@ function FoodId() {
   };
 
   const recomendation = recomendations.filter((_, index) => index <= +'5');
+  useEffect(() => {
+    if (filteredById.length) {
+      setFavorited({
+        id: filteredById[0].idMeal,
+        type: 'food',
+        nationality: filteredById[0].strArea,
+        category: filteredById[0].strCategory,
+        alcoholicOrNot: '',
+        name: filteredById[0].strMeal,
+        image: filteredById[0].strMealThumb,
+      });
+    }
+  }, [filteredById]);
+
+  const favoriteRecipe = () => {
+    const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    console.log(recipes);
+    if (recipes === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([favorited]));
+    } else if (recipes !== null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...recipes, favorited]));
+    }
+  };
 
   return (
     filteredById.length && (
@@ -144,7 +176,11 @@ function FoodId() {
             />
           </button>
           {copied && <span>Link copied!</span>}
-          <button type="button" data-testid="favorite-btn">
+          <button
+            type="button"
+            data-testid="favorite-btn"
+            onClick={ () => favoriteRecipe() }
+          >
             Favorite
           </button>
         </div>
