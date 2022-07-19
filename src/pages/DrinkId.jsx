@@ -2,12 +2,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
+import shareIcon from '../images/shareIcon.svg';
+
+const copy = require('clipboard-copy');
 
 function DrinkId() {
   const { setFilteredById, filteredById,
     setRecomendations, recomendations } = useContext(DataContext);
   const { id } = useParams();
-  const [recipeState, setRecipeState] = useState(true);
+  const url = window.location.href;
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const doFetch = async () => {
@@ -32,6 +36,11 @@ function DrinkId() {
     recomendationFetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const copyUrl = () => {
+    copy(url);
+    setCopied(!copied);
+  };
 
   const recomendation = recomendations.filter((_, index) => index <= +'5');
 
@@ -130,9 +139,13 @@ function DrinkId() {
           </li>
         </ul>
         <div>
-          <button type="button" data-testid="share-btn">
-            Share
+          <button type="button" data-testid="share-btn" onClick={ () => copyUrl() }>
+            <img
+              src={ shareIcon }
+              alt="icone de perfil"
+            />
           </button>
+          {copied && <span>Link copied!</span>}
           <button type="button" data-testid="favorite-btn">
             Favorite
           </button>
@@ -156,9 +169,8 @@ function DrinkId() {
             type="button"
             className="btn-footer"
             data-testid="start-recipe-btn"
-            onClick={ () => setRecipeState(!recipeState) }
           >
-            {recipeState ? 'Continue Recipe' : 'Start Recipe'}
+            Continue Recipe
           </button>
         </Link>
       </div>
