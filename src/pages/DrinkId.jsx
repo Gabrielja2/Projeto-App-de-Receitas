@@ -1,12 +1,13 @@
 // import PropTypes from 'prop-types';
-import React, { useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 
 function DrinkId() {
   const { setFilteredById, filteredById,
     setRecomendations, recomendations } = useContext(DataContext);
   const { id } = useParams();
+  const [recipeState, setRecipeState] = useState(true);
 
   useEffect(() => {
     const doFetch = async () => {
@@ -133,7 +134,7 @@ function DrinkId() {
           {recomendation.length
             && recomendation.map((e, i) => (
               <div
-                key={ e.strMeal }
+                key={ i }
                 className="recomendation-card"
                 data-testid={ `${i}-recomendation-card` }
               >
@@ -142,9 +143,16 @@ function DrinkId() {
               </div>
             ))}
         </div>
-        <button type="button" className="btn-footer" data-testid="start-recipe-btn">
-          Start Recipe
-        </button>
+        <Link to={ `/drinks/${id}/in-progress` }>
+          <button
+            type="button"
+            className="btn-footer"
+            data-testid="start-recipe-btn"
+            onClick={ () => setRecipeState(!recipeState) }
+          >
+            {recipeState ? 'Continue Recipe' : 'Start Recipe'}
+          </button>
+        </Link>
       </div>
     )
   );
