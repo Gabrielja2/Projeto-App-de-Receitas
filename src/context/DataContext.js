@@ -102,6 +102,48 @@ function DataProvider({ children }) {
     }
   }, [id, storage]);
 
+  const [favorited, setFavorited] = useState({});
+  const favoriteRecipe = () => {
+    const verify = storage && storage.some((e) => e.id === id);
+    if (storage === null && !verify) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([favorited]));
+      setStorage(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    } else if (storage !== null && !verify) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...storage, favorited]));
+      setStorage(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    } else if (verify) {
+      setHeart(false);
+      localStorage.setItem('favoriteRecipes',
+        JSON.stringify(storage.filter((e) => e.id !== id)));
+      setStorage(storage.filter((e) => e.id !== id));
+    }
+  };
+
+  const [foodOrDrink, setFoodOrDrink] = useState('');
+  useEffect(() => {
+    if (filteredById.length && foodOrDrink === 'drinks') {
+      setFavorited({
+        id: filteredById[0].idDrink,
+        type: 'drink',
+        category: filteredById[0].strCategory,
+        alcoholicOrNot: filteredById[0].strAlcoholic,
+        name: filteredById[0].strDrink,
+        image: filteredById[0].strDrinkThumb,
+        nationality: '',
+      });
+    } else if (filteredById.length && foodOrDrink === 'foods/') {
+      setFavorited({
+        id: filteredById[0].idMeal,
+        type: 'food',
+        category: filteredById[0].strCategory,
+        alcoholicOrNot: '',
+        name: filteredById[0].strMeal,
+        image: filteredById[0].strMealThumb,
+        nationality: filteredById[0].strArea,
+      });
+    }
+  }, [filteredById, foodOrDrink]);
+
   const contextValue = {
     userData,
     setUserData,
@@ -132,6 +174,10 @@ function DataProvider({ children }) {
     setId,
     heart,
     setHeart,
+    favoriteRecipe,
+    setFavorited,
+    favorited,
+    setFoodOrDrink,
   };
 
   return (

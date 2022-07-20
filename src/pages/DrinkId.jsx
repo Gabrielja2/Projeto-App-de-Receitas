@@ -187,7 +187,10 @@ function DrinkId() {
             onClick={ () => favoriteRecipe() }
             src={ heart ? blackHeartIcon : whiteHeartIcon }
           >
-            {' '}
+            <img
+              src={ heart ? blackHeartIcon : whiteHeartIcon }
+              alt="icone de perfil"
+            />
           </button>
         </div>
         <p data-testid="instructions">{filteredById[0].strInstructions}</p>
