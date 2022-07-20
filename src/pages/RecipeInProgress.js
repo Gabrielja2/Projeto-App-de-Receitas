@@ -43,19 +43,10 @@ function RecipeInProgress() {
       return acc;
     }, []);
 
-  // const measure = filteredById.length && Object.entries(filteredById[0])
-  //   .reduce((acc, e) => {
-  //     if (e[0].includes('strMeasure')) {
-  //       acc.push(e[1]);
-  //     }
-  //     return acc;
-  //   }, []);
-
   const copyUrl = () => {
     copy(url);
     setCopied(!copied);
   };
-  console.log(ingredients);
 
   return (
     filteredById.length && (
