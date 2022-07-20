@@ -2,24 +2,20 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
 function FoodId() {
   const { setFilteredById, filteredById,
-    setRecomendations, recomendations } = useContext(DataContext);
+    setRecomendations, recomendations, storage, setStorage,
+    heart, setHeart, setId } = useContext(DataContext);
+
   const { id } = useParams();
   const url = window.location.href;
   const [copied, setCopied] = useState(false);
-  const [favorited, setFavorited] = useState({
-    id: '',
-    type: '',
-    nationality: '',
-    category: '',
-    alcoholicOrNot: '',
-    name: '',
-    image: '',
-  });
+  const [favorited, setFavorited] = useState({});
 
   useEffect(() => {
     const doFetch = async () => {
@@ -30,6 +26,7 @@ function FoodId() {
       setFilteredById(json.meals);
     };
     doFetch();
+    setId(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -66,12 +63,18 @@ function FoodId() {
   }, [filteredById]);
 
   const favoriteRecipe = () => {
-    const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    console.log(recipes);
-    if (recipes === null) {
+    const verify = storage && storage.some((e) => e.id === id);
+    if (storage === null && !verify) {
       localStorage.setItem('favoriteRecipes', JSON.stringify([favorited]));
-    } else if (recipes !== null) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([...recipes, favorited]));
+      setStorage(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    } else if (storage !== null && !verify) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...storage, favorited]));
+      setStorage(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    } else if (verify) {
+      setHeart(false);
+      localStorage.setItem('favoriteRecipes',
+        JSON.stringify(storage.filter((e) => e.id !== id)));
+      setStorage(storage.filter((e) => e.id !== id));
     }
   };
 
@@ -180,8 +183,9 @@ function FoodId() {
             type="button"
             data-testid="favorite-btn"
             onClick={ () => favoriteRecipe() }
+            src={ heart ? blackHeartIcon : whiteHeartIcon }
           >
-            Favorite
+            {' '}
           </button>
         </div>
         <p data-testid="instructions">{filteredById[0].strInstructions}</p>

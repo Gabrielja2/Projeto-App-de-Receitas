@@ -85,6 +85,23 @@ function DataProvider({ children }) {
     }
   }, [searched, foodFilter, actualPage]);
 
+  const [storage, setStorage] = useState([]);
+  useEffect(() => {
+    setStorage(JSON.parse(localStorage.getItem('favoriteRecipes')));
+  }, []);
+
+  const [id, setId] = useState([]);
+  const [heart, setHeart] = useState(false);
+  useEffect(() => {
+    const verify = storage && storage.some((e) => e.id === id);
+
+    if (storage === null || !verify) {
+      setHeart(false);
+    } else if (storage !== null && verify) {
+      setHeart(true);
+    }
+  }, [id, storage]);
+
   const contextValue = {
     userData,
     setUserData,
@@ -110,6 +127,11 @@ function DataProvider({ children }) {
     setFilteredById,
     recomendations,
     setRecomendations,
+    setStorage,
+    storage,
+    setId,
+    heart,
+    setHeart,
   };
 
   return (
