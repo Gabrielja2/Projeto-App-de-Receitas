@@ -10,7 +10,7 @@ const copy = require('clipboard-copy');
 function FoodId() {
   const { setFilteredById, filteredById,
     setRecomendations, recomendations, setFavorited, saveInprogressRecipes,
-    heart, favoriteRecipe, setId } = useContext(DataContext);
+    heart, favoriteRecipe, setId, ingredients } = useContext(DataContext);
 
   const { id } = useParams();
   const url = window.location.href;
@@ -60,14 +60,6 @@ function FoodId() {
       });
     }
   }, [filteredById, setFavorited]);
-
-  const ingredients = filteredById.length && Object.entries(filteredById[0])
-    .reduce((acc, e) => {
-      if (e[0].includes('strIngredient')) {
-        acc.push(e[1]);
-      }
-      return acc;
-    }, []);
 
   const measures = filteredById.length && Object.entries(filteredById[0])
     .reduce((acc, e) => {
@@ -144,8 +136,8 @@ function FoodId() {
             type="button"
             className="btn-footer"
             data-testid="start-recipe-btn"
-            onClick={ () => saveInprogressRecipes('',
-              ingredients.filter((item) => item !== '' && item !== null)) }
+            onClick={ () => ingredients && saveInprogressRecipes('',
+              ingredients.filter((item) => item !== null)) }
           >
             Continue Recipe
           </button>

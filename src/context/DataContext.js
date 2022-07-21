@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { createContext, useState, useEffect } from 'react';
 
 export const DataContext = createContext();
-
 function DataProvider({ children }) {
   const USER = {
     email: '',
@@ -136,7 +135,7 @@ function DataProvider({ children }) {
   }, [filteredById, foodOrDrink]);
   const saveInprogressRecipes = (param1, param2) => {
     const ingredientState = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (param1 !== '') {
+    if (param1 !== '' && ingredientState) {
       const value = Object.values(param1);
       localStorage.setItem('inProgressRecipes', (
         JSON.stringify({
@@ -149,7 +148,7 @@ function DataProvider({ children }) {
           },
         })
       ));
-    } else {
+    } else if (param1 === '' && ingredientState) {
       const value = Object.values(param2);
       localStorage.setItem('inProgressRecipes', (
         JSON.stringify({
@@ -190,9 +189,7 @@ function DataProvider({ children }) {
   const verifyImg = (url) => {
     if (url === 'drinks') {
       setCheckImg(filteredById[0].strDrinkThumb);
-    } else {
-      setCheckImg(filteredById[0].strMealThumb);
-    }
+    } else { setCheckImg(filteredById[0].strMealThumb); }
   };
   const contextValue = {
     userData,
@@ -233,18 +230,12 @@ function DataProvider({ children }) {
     checks,
     ingredients,
     verifyImg,
-    checkImg,
-  };
-
+    checkImg };
   return (
     <DataContext.Provider value={ contextValue }>
       {children}
     </DataContext.Provider>
   );
 }
-
-DataProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
+DataProvider.propTypes = { children: PropTypes.node.isRequired };
 export default DataProvider;

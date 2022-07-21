@@ -25,6 +25,8 @@ function RecipeInProgress() {
   const { id } = useParams();
   const [copied, setCopied] = useState(false);
   const url = window.location.href.substr(+'22', +'6');
+  const link = window.location.href;
+  const refinedLink = link.slice(0, link.length - +'12');
   setFoodOrDrink(url);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ function RecipeInProgress() {
   }, []);
 
   const copyUrl = () => {
-    copy(url);
+    copy(refinedLink);
     setCopied(!copied);
   };
 
