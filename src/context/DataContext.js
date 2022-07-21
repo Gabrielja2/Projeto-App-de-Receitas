@@ -144,6 +144,54 @@ function DataProvider({ children }) {
     }
   }, [filteredById, foodOrDrink]);
 
+  const saveInprogressRecipes = (param1, param2) => {
+    const ingredientState = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (param1 !== '') {
+      const value = Object.values(param1);
+      localStorage.setItem('inProgressRecipes', (
+        JSON.stringify({
+          cocktails: {
+            ...ingredientState.cocktails,
+            [id]: value,
+          },
+          meals: {
+            ...ingredientState.meals,
+          },
+        })
+      ));
+    } else {
+      const value = Object.values(param2);
+      localStorage.setItem('inProgressRecipes', (
+        JSON.stringify({
+          cocktails: {
+            ...ingredientState.cocktails,
+          },
+          meals: {
+            ...ingredientState.meals,
+            [id]: value,
+          },
+        })
+      ));
+    }
+  };
+
+  const [checks, setChecks] = useState([]);
+  const verifyChecks = (nome) => {
+    if (checks && checks.includes(nome)) {
+      setChecks(checks.filter((element) => element !== nome));
+    } else {
+      setChecks(!checks.length ? [nome] : [...checks, nome]);
+    }
+  };
+
+  const ingredients = filteredById.length
+  && Object.entries(filteredById[0]).reduce((acc, e) => {
+    if (e[0].includes('strIngredient')) {
+      acc.push(e[1]);
+    }
+    return acc;
+  }, []);
+
   const contextValue = {
     userData,
     setUserData,
@@ -178,6 +226,10 @@ function DataProvider({ children }) {
     setFavorited,
     favorited,
     setFoodOrDrink,
+    saveInprogressRecipes,
+    verifyChecks,
+    checks,
+    ingredients,
   };
 
   return (

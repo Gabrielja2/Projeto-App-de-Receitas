@@ -9,14 +9,21 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 const copy = require('clipboard-copy');
 
 function DrinkId() {
-  const { setFilteredById, filteredById,
-    setRecomendations, recomendations, storage, setStorage,
-    heart, setHeart, setId } = useContext(DataContext);
+  const {
+    setFilteredById,
+    filteredById,
+    setRecomendations,
+    recomendations,
+    saveInprogressRecipes,
+    heart,
+    favoriteRecipe,
+    setId,
+    setFavorited,
+  } = useContext(DataContext);
 
   const { id } = useParams();
   const url = window.location.href;
   const [copied, setCopied] = useState(false);
-  const [favorited, setFavorited] = useState({});
 
   useEffect(() => {
     const doFetch = async () => {
@@ -61,23 +68,23 @@ function DrinkId() {
         nationality: '',
       });
     }
-  }, [filteredById]);
+  }, [filteredById, setFavorited]);
 
-  const favoriteRecipe = () => {
-    const verify = storage && storage.some((e) => e.id === id);
-    if (storage === null && !verify) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([favorited]));
-      setStorage(JSON.parse(localStorage.getItem('favoriteRecipes')));
-    } else if (storage !== null && !verify) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([...storage, favorited]));
-      setStorage(JSON.parse(localStorage.getItem('favoriteRecipes')));
-    } else if (verify) {
-      setHeart(false);
-      localStorage.setItem('favoriteRecipes',
-        JSON.stringify(storage.filter((e) => e.id !== id)));
-      setStorage(storage.filter((e) => e.id !== id));
-    }
-  };
+  const ingredients = filteredById.length
+    && Object.entries(filteredById[0]).reduce((acc, e) => {
+      if (e[0].includes('strIngredient')) {
+        acc.push(e[1]);
+      }
+      return acc;
+    }, []);
+
+  const measures = filteredById.length
+    && Object.entries(filteredById[0]).reduce((acc, e) => {
+      if (e[0].includes('strMeasure')) {
+        acc.push(e[1]);
+      }
+      return acc;
+    }, []);
 
   return (
     filteredById.length && (
@@ -92,93 +99,21 @@ function DrinkId() {
         <h3 data-testid="recipe-category">{filteredById[0].strCategory}</h3>
         <h4 data-testid="recipe-category">{filteredById[0].strAlcoholic}</h4>
         <ul>
-          <li data-testid="0-ingredient-name-and-measure">
-            {filteredById[0].strIngredient1}
-            {filteredById[0].strMeasure1}
-          </li>
-          <li data-testid="1-ingredient-name-and-measure">
-            {filteredById[0].strIngredient2}
-            {filteredById[0].strMeasure2}
-          </li>
-          <li data-testid="2-ingredient-name-and-measure">
-            {filteredById[0].strIngredient3}
-            {filteredById[0].strMeasure3}
-          </li>
-          <li data-testid="3-ingredient-name-and-measure">
-            {filteredById[0].strIngredient4}
-            {filteredById[0].strMeasure4}
-          </li>
-          <li data-testid="4-ingredient-name-and-measure">
-            {filteredById[0].strIngredient5}
-            {filteredById[0].strMeasure5}
-          </li>
-          <li data-testid="5-ingredient-name-and-measure">
-            {filteredById[0].strIngredient6}
-            {filteredById[0].strMeasure6}
-          </li>
-          <li data-testid="6-ingredient-name-and-measure">
-            {filteredById[0].strIngredient7}
-            {filteredById[0].strMeasure7}
-          </li>
-          <li data-testid="7-ingredient-name-and-measure">
-            {filteredById[0].strIngredient8}
-            {filteredById[0].strMeasure8}
-          </li>
-          <li data-testid="8-ingredient-name-and-measure">
-            {filteredById[0].strIngredient9}
-            {filteredById[0].strMeasure9}
-          </li>
-          <li data-testid="9-ingredient-name-and-measure">
-            {filteredById[0].strIngredient10}
-            {filteredById[0].strMeasure10}
-          </li>
-          <li data-testid="10-ingredient-name-and-measure">
-            {filteredById[0].strIngredient11}
-            {filteredById[0].strMeasure11}
-          </li>
-          <li data-testid="11-ingredient-name-and-measure">
-            {filteredById[0].strIngredient12}
-            {filteredById[0].strMeasure12}
-          </li>
-          <li data-testid="12-ingredient-name-and-measure">
-            {filteredById[0].strIngredient13}
-            {filteredById[0].strMeasure13}
-          </li>
-          <li data-testid="13-ingredient-name-and-measure">
-            {filteredById[0].strIngredient14}
-            {filteredById[0].strMeasure14}
-          </li>
-          <li data-testid="14-ingredient-name-and-measure">
-            {filteredById[0].strIngredient15}
-            {filteredById[0].strMeasure15}
-          </li>
-          <li data-testid="15-ingredient-name-and-measure">
-            {filteredById[0].strIngredient16}
-            {filteredById[0].strMeasure16}
-          </li>
-          <li data-testid="16-ingredient-name-and-measure">
-            {filteredById[0].strIngredient17}
-            {filteredById[0].strMeasure17}
-          </li>
-          <li data-testid="17-ingredient-name-and-measure">
-            {filteredById[0].strIngredient18}
-            {filteredById[0].strMeasure18}
-          </li>
-          <li data-testid="18-ingredient-name-and-measure">
-            {filteredById[0].strIngredient19}
-            {filteredById[0].strMeasure19}
-          </li>
-          <li data-testid="19-ingredient-name-and-measure">
-            {filteredById[0].strIngredient20}
-            {filteredById[0].strMeasure20}
-          </li>
+          {ingredients
+            .filter((item) => item !== '' && item !== null)
+            .map((e, i) => (
+              <li key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
+                {`${e} ${measures[i]}`}
+              </li>
+            ))}
         </ul>
         <div>
-          <button type="button" data-testid="share-btn" onClick={ () => copyUrl() }>
-            <img
-              src={ shareIcon }
-              alt="icone de perfil"
-            />
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={ () => copyUrl() }
+          >
+            <img src={ shareIcon } alt="icone de perfil" />
           </button>
           {copied && <span>Link copied!</span>}
           <button
@@ -212,6 +147,9 @@ function DrinkId() {
             type="button"
             className="btn-footer"
             data-testid="start-recipe-btn"
+            onClick={ () => saveInprogressRecipes(
+              ingredients.filter((item) => item !== '' && item !== null),
+            ) }
           >
             Continue Recipe
           </button>

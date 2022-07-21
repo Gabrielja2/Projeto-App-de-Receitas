@@ -86,6 +86,10 @@
   position: fixed;
 }
 
+.cut {
+  text-decoration: line-through;
+}
+
 @keyframes shake {
 
   0% {
