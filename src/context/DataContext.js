@@ -8,7 +8,6 @@ function DataProvider({ children }) {
     email: '',
     password: '',
   };
-
   const [userData, setUserData] = useState(USER);
   const [mealsToken, setMealsToken] = useState(1);
   const [cocktailsToken, setCocktailsToken] = useState(1);
@@ -17,7 +16,6 @@ function DataProvider({ children }) {
   const [resetFilter, setResetFilter] = useState(false);
   const [filteredById, setFilteredById] = useState([]);
   const [recomendations, setRecomendations] = useState([]);
-
   const [searched, setSearched] = useState('');
   const changeSearch = (param) => {
     setSearched(param);
@@ -28,9 +26,7 @@ function DataProvider({ children }) {
   const changeRecipes = (param) => {
     setRecipes(param);
   };
-
   const fetchErro = 'Sorry, we haven\'t found any recipes for these filters.';
-
   useEffect(() => {
     const foodFetch = async () => {
       if (foodFilter === 'ingredient') {
@@ -53,7 +49,6 @@ function DataProvider({ children }) {
       foodFetch();
     }
   }, [searched, foodFilter, actualPage]);
-
   useEffect(() => {
     const drinkFetch = async () => {
       if (foodFilter === 'ingredient') {
@@ -84,12 +79,10 @@ function DataProvider({ children }) {
       drinkFetch();
     }
   }, [searched, foodFilter, actualPage]);
-
   const [storage, setStorage] = useState([]);
   useEffect(() => {
     setStorage(JSON.parse(localStorage.getItem('favoriteRecipes')));
   }, []);
-
   const [id, setId] = useState([]);
   const [heart, setHeart] = useState(false);
   useEffect(() => {
@@ -101,7 +94,6 @@ function DataProvider({ children }) {
       setHeart(true);
     }
   }, [id, storage]);
-
   const [favorited, setFavorited] = useState({});
   const favoriteRecipe = () => {
     const verify = storage && storage.some((e) => e.id === id);
@@ -118,7 +110,6 @@ function DataProvider({ children }) {
       setStorage(storage.filter((e) => e.id !== id));
     }
   };
-
   const [foodOrDrink, setFoodOrDrink] = useState('');
   useEffect(() => {
     if (filteredById.length && foodOrDrink === 'drinks') {
@@ -143,7 +134,6 @@ function DataProvider({ children }) {
       });
     }
   }, [filteredById, foodOrDrink]);
-
   const saveInprogressRecipes = (param1, param2) => {
     const ingredientState = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (param1 !== '') {
@@ -174,16 +164,21 @@ function DataProvider({ children }) {
       ));
     }
   };
-
   const [checks, setChecks] = useState([]);
   const verifyChecks = (nome) => {
+    const arrChecks = JSON.parse(localStorage.getItem('checks'));
     if (checks && checks.includes(nome)) {
       setChecks(checks.filter((element) => element !== nome));
-    } else {
+      localStorage.setItem('checks',
+        JSON.stringify(checks.filter((element) => element !== nome)));
+    } else if (!checks.includes(nome) && !arrChecks) {
+      setChecks(!checks.length ? [nome] : [...checks, nome]);
+      localStorage.setItem('checks', JSON.stringify([nome]));
+    } else if (arrChecks) {
+      localStorage.setItem('checks', JSON.stringify([...arrChecks, nome]));
       setChecks(!checks.length ? [nome] : [...checks, nome]);
     }
   };
-
   const ingredients = filteredById.length
   && Object.entries(filteredById[0]).reduce((acc, e) => {
     if (e[0].includes('strIngredient')) {
@@ -191,7 +186,14 @@ function DataProvider({ children }) {
     }
     return acc;
   }, []);
-
+  const [checkImg, setCheckImg] = useState('');
+  const verifyImg = (url) => {
+    if (url === 'drinks') {
+      setCheckImg(filteredById[0].strDrinkThumb);
+    } else {
+      setCheckImg(filteredById[0].strMealThumb);
+    }
+  };
   const contextValue = {
     userData,
     setUserData,
@@ -230,6 +232,8 @@ function DataProvider({ children }) {
     verifyChecks,
     checks,
     ingredients,
+    verifyImg,
+    checkImg,
   };
 
   return (

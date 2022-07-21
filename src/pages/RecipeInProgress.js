@@ -18,8 +18,9 @@ function RecipeInProgress() {
     setId,
     favorited,
     ingredients,
-    checks,
     verifyChecks,
+    verifyImg,
+    checkImg,
   } = useContext(DataContext);
   const { id } = useParams();
   const [copied, setCopied] = useState(false);
@@ -27,7 +28,7 @@ function RecipeInProgress() {
   setFoodOrDrink(url);
 
   useEffect(() => {
-    const doFetch = async () => {
+    const progressFetch = async () => {
       if (url === 'drinks') {
         const resp = await fetch(
           `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
@@ -42,7 +43,7 @@ function RecipeInProgress() {
         setFilteredById(json.meals);
       }
     };
-    doFetch();
+    progressFetch();
     setId(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -52,16 +53,15 @@ function RecipeInProgress() {
     setCopied(!copied);
   };
 
+  const storedChecks = JSON.parse(localStorage.getItem('checks'));
+
   return (
     filteredById.length && (
       <div>
+        {verifyImg(url)}
         <img
           className="card-img"
-          src={
-            url === 'drinks'
-              ? filteredById[0].strDrinkThumb
-              : filteredById[0].strMealThumb
-          }
+          src={ checkImg }
           alt="imagem da receita"
           data-testid="recipe-photo"
         />
@@ -97,10 +97,11 @@ function RecipeInProgress() {
                   type="checkbox"
                   name={ e }
                   index={ i }
-                  onClick={ ({ target: { name: nome } }) => verifyChecks(nome) }
+                  onChange={ ({ target: { name: nome } }) => verifyChecks(nome) }
+                  checked={ storedChecks && storedChecks.includes(e) ? 'cut' : null }
                 />
                 <li
-                  className={ checks && checks.includes(e) ? 'cut' : null }
+                  className={ storedChecks && storedChecks.includes(e) ? 'cut' : null }
                 >
                   {e}
                 </li>
