@@ -21,6 +21,7 @@ function RecipeInProgress() {
     verifyChecks,
     verifyImg,
     checkImg,
+    arrChecks,
   } = useContext(DataContext);
   const { id } = useParams();
   const [copied, setCopied] = useState(false);
@@ -96,14 +97,19 @@ function RecipeInProgress() {
             .map((e, i) => (
               <div key={ i } data-testid={ `${i}-ingredient-step` }>
                 <input
+                  className="teste"
                   type="checkbox"
                   name={ e }
                   index={ i }
                   onChange={ ({ target: { name: nome } }) => verifyChecks(nome) }
-                  checked={ storedChecks && storedChecks.includes(e) ? 'cut' : null }
+                  checked={
+                    storedChecks && storedChecks.includes(e) ? 'cut' : null
+                  }
                 />
                 <li
-                  className={ storedChecks && storedChecks.includes(e) ? 'cut' : null }
+                  className={
+                    storedChecks && storedChecks.includes(e) ? 'cut' : null
+                  }
                 >
                   {e}
                 </li>
@@ -111,7 +117,11 @@ function RecipeInProgress() {
             ))}
         </ul>
         <p data-testid="instructions">{filteredById[0].strInstructions}</p>
-        <button type="button" data-testid="finish-recipe-btn">
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled={ !arrChecks }
+        >
           Finish
         </button>
       </div>

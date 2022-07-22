@@ -191,6 +191,8 @@ function DataProvider({ children }) {
       setCheckImg(filteredById[0].strDrinkThumb);
     } else { setCheckImg(filteredById[0].strMealThumb); }
   };
+  const boxes = document.querySelectorAll('.teste');
+  const arrChecks = boxes && [...boxes].every((e) => e.checked === true);
   const contextValue = {
     userData,
     setUserData,
@@ -230,6 +232,7 @@ function DataProvider({ children }) {
     checks,
     ingredients,
     verifyImg,
+    arrChecks,
     checkImg };
   return (
     <DataContext.Provider value={ contextValue }>
