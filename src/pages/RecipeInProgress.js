@@ -1,6 +1,6 @@
 // import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -22,6 +22,7 @@ function RecipeInProgress() {
     verifyImg,
     checkImg,
     arrChecks,
+    finishRecipes,
   } = useContext(DataContext);
   const { id } = useParams();
   const [copied, setCopied] = useState(false);
@@ -29,6 +30,12 @@ function RecipeInProgress() {
   const link = window.location.href;
   const refinedLink = link.slice(0, link.length - +'12');
   setFoodOrDrink(url);
+  const date = new Date();
+  const day = String(date.getDate()).padStart(2, '0');
+  const mounth = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  const currentDate = `${day}/${mounth}/${year}`;
+  const [currentArr, setCurrentArr] = useState({});
 
   useEffect(() => {
     const progressFetch = async () => {
@@ -37,12 +44,38 @@ function RecipeInProgress() {
           `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
         );
         const json = await resp.json();
+        setCurrentArr(
+          {
+            id: json.drinks[0].idDrink,
+            type: 'drink',
+            nationality: '',
+            category: json.drinks[0].strCategory,
+            alcoholicOrNot: json.drinks[0].strAlcoholic,
+            name: json.drinks[0].strDrink,
+            image: json.drinks[0].strDrinkThumb,
+            doneDate: currentDate,
+            tags: [],
+          },
+        );
         setFilteredById(json.drinks);
       } else {
         const resp = await fetch(
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
         );
         const json = await resp.json();
+        setCurrentArr(
+          {
+            id: json.meals[0].idMeal,
+            type: 'food',
+            nationality: json.meals[0].strArea,
+            category: json.meals[0].strCategory,
+            alcoholicOrNot: '',
+            name: json.meals[0].strMeal,
+            image: json.meals[0].strMealThumb,
+            doneDate: currentDate,
+            tags: [json.meals[0].strTags.split(',')],
+          },
+        );
         setFilteredById(json.meals);
       }
     };
@@ -57,7 +90,7 @@ function RecipeInProgress() {
   };
 
   const storedChecks = JSON.parse(localStorage.getItem('checks'));
-
+  console.log(currentArr);
   return (
     filteredById.length && (
       <div>
@@ -117,13 +150,16 @@ function RecipeInProgress() {
             ))}
         </ul>
         <p data-testid="instructions">{filteredById[0].strInstructions}</p>
-        <button
-          type="button"
-          data-testid="finish-recipe-btn"
-          disabled={ !arrChecks }
-        >
-          Finish
-        </button>
+        <Link to="/done-recipes">
+          <button
+            type="button"
+            data-testid="finish-recipe-btn"
+            disabled={ !arrChecks }
+            onClick={ () => finishRecipes(currentArr) }
+          >
+            Finish
+          </button>
+        </Link>
       </div>
     )
   );

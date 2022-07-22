@@ -44,9 +44,7 @@ function DataProvider({ children }) {
         changeRecipes(json);
       }
     };
-    if (actualPage === 'food') {
-      foodFetch();
-    }
+    if (actualPage === 'food') { foodFetch(); }
   }, [searched, foodFilter, actualPage]);
   useEffect(() => {
     const drinkFetch = async () => {
@@ -63,9 +61,7 @@ function DataProvider({ children }) {
           const resp = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searched}`);
           const json = await resp.json();
           changeRecipes(json);
-        } catch (e) {
-          global.alert(fetchErro);
-        }
+        } catch (e) { global.alert(fetchErro); }
       } else if (foodFilter === 'firstLetter' && searched.length > 1) {
         global.alert('Your search must have only 1 (one) character');
       } else if (foodFilter === 'firstLetter') {
@@ -86,7 +82,6 @@ function DataProvider({ children }) {
   const [heart, setHeart] = useState(false);
   useEffect(() => {
     const verify = storage && storage.some((e) => e.id === id);
-
     if (storage === null || !verify) {
       setHeart(false);
     } else if (storage !== null && verify) {
@@ -119,8 +114,7 @@ function DataProvider({ children }) {
         alcoholicOrNot: filteredById[0].strAlcoholic,
         name: filteredById[0].strDrink,
         image: filteredById[0].strDrinkThumb,
-        nationality: '',
-      });
+        nationality: '' });
     } else if (filteredById.length && foodOrDrink === 'foods/') {
       setFavorited({
         id: filteredById[0].idMeal,
@@ -129,8 +123,7 @@ function DataProvider({ children }) {
         alcoholicOrNot: '',
         name: filteredById[0].strMeal,
         image: filteredById[0].strMealThumb,
-        nationality: filteredById[0].strArea,
-      });
+        nationality: filteredById[0].strArea });
     }
   }, [filteredById, foodOrDrink]);
   const saveInprogressRecipes = (param1, param2) => {
@@ -141,26 +134,20 @@ function DataProvider({ children }) {
         JSON.stringify({
           cocktails: {
             ...ingredientState.cocktails,
-            [id]: value,
-          },
+            [id]: value },
           meals: {
-            ...ingredientState.meals,
-          },
-        })
-      ));
+            ...ingredientState.meals },
+        })));
     } else if (param1 === '' && ingredientState) {
       const value = Object.values(param2);
       localStorage.setItem('inProgressRecipes', (
         JSON.stringify({
           cocktails: {
-            ...ingredientState.cocktails,
-          },
+            ...ingredientState.cocktails },
           meals: {
             ...ingredientState.meals,
-            [id]: value,
-          },
-        })
-      ));
+            [id]: value },
+        })));
     }
   };
   const [checks, setChecks] = useState([]);
@@ -193,6 +180,16 @@ function DataProvider({ children }) {
   };
   const boxes = document.querySelectorAll('.teste');
   const arrChecks = boxes && [...boxes].every((e) => e.checked === true);
+  const finishRecipes = (param) => {
+    console.log(param);
+    const arrRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (arrRecipes) {
+      localStorage.setItem('doneRecipes',
+        JSON.stringify([...arrRecipes, param]));
+    } else {
+      localStorage.setItem('doneRecipes', JSON.stringify([param]));
+    }
+  };
   const contextValue = {
     userData,
     setUserData,
@@ -233,6 +230,7 @@ function DataProvider({ children }) {
     ingredients,
     verifyImg,
     arrChecks,
+    finishRecipes,
     checkImg };
   return (
     <DataContext.Provider value={ contextValue }>

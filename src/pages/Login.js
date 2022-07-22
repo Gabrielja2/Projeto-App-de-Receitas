@@ -25,7 +25,6 @@ function Login({ history }) {
     localStorage.setItem('user', JSON.stringify({ email: userData.email }));
     localStorage.setItem('mealsToken', mealsToken);
     localStorage.setItem('cocktailsToken', cocktailsToken);
-    localStorage.setItem('doneRecipes', []);
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails: {},
       meals: {},
