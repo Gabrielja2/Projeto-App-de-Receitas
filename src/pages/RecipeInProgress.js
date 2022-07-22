@@ -90,7 +90,6 @@ function RecipeInProgress() {
   };
 
   const storedChecks = JSON.parse(localStorage.getItem('checks'));
-  console.log(currentArr);
   return (
     filteredById.length && (
       <div>

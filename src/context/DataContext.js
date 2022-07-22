@@ -181,7 +181,6 @@ function DataProvider({ children }) {
   const boxes = document.querySelectorAll('.teste');
   const arrChecks = boxes && [...boxes].every((e) => e.checked === true);
   const finishRecipes = (param) => {
-    console.log(param);
     const arrRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     if (arrRecipes) {
       localStorage.setItem('doneRecipes',
