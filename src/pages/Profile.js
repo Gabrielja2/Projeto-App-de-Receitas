@@ -11,25 +11,48 @@ function Profile() {
     localStorage.clear();
   };
   return (
-    <div>
+    <div className="bk-login">
       <Header title="Profile" bool={ false } />
-      {string && (<h3 data-testid="profile-email">{ string.email }</h3>) }
-      <Link to="/done-recipes">
-        <button data-testid="profile-done-btn" type="button">Done Recipes</button>
-      </Link>
-      <Link to="/favorite-recipes">
-        <button data-testid="profile-favorite-btn" type="button">Favorite Recipes</button>
-      </Link>
-      <Link to="/">
-        <button
-          data-testid="profile-logout-btn"
-          type="button"
-          onClick={ handleClick }
-        >
-          Logout
-        </button>
-      </Link>
-      <Footer />
+      <div className="profile-father">
+        {string && (<h3 data-testid="profile-email">{ string.email }</h3>) }
+        <div>
+          <Link to="/done-recipes">
+            <button
+              className="button-80"
+              data-testid="profile-done-btn"
+              type="button"
+            >
+              Done Recipes
+
+            </button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/favorite-recipes">
+            <button
+              className="button-80"
+              data-testid="profile-favorite-btn"
+              type="button"
+            >
+              Favorite Recipes
+
+            </button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/">
+            <button
+              className="button-80"
+              data-testid="profile-logout-btn"
+              type="button"
+              onClick={ handleClick }
+            >
+              Logout
+            </button>
+          </Link>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 }

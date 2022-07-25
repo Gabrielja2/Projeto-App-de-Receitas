@@ -14,27 +14,29 @@ function Header({ title, bool, btnName }) {
   };
 
   return (
-    <header>
-      <Link to="/profile">
-        <button type="button">
-          <img
-            src={ icon }
-            data-testid="profile-top-btn"
-            alt="icone de perfil"
-          />
-        </button>
-      </Link>
-      {bool && (
-        <button type="button" onClick={ changeSearch }>
-          <img
-            src={ searchIcon }
-            data-testid="search-top-btn"
-            alt="icone de pesquisa"
-          />
-        </button>)}
-      {!disableSearch && (
-        <SearchBar btnName={ btnName } />
-      )}
+    <header className="header-father">
+      <div className="h-btn">
+        <Link to="/profile">
+          <button className="btn-h" type="button">
+            <img
+              src={ icon }
+              data-testid="profile-top-btn"
+              alt="icone de perfil"
+            />
+          </button>
+        </Link>
+        {bool && (
+          <button className="btn-h" type="button" onClick={ changeSearch }>
+            <img
+              src={ searchIcon }
+              data-testid="search-top-btn"
+              alt="icone de pesquisa"
+            />
+          </button>)}
+        {!disableSearch && (
+          <SearchBar btnName={ btnName } />
+        )}
+      </div>
       <h1 data-testid="page-title">{title}</h1>
     </header>
   );

@@ -28,11 +28,12 @@ function DrinkFilteredRecipes() {
   };
 
   return (
-    <div>
+    <div className="filters-father">
       {categories
       && categories.map((e, index) => (
-        <div key={ index }>
+        <div className="cards" key={ index }>
           <button
+            className="button-29"
             name={ e.strCategory }
             type="button"
             data-testid={ `${e.strCategory}-category-filter` }
@@ -43,6 +44,7 @@ function DrinkFilteredRecipes() {
         </div>
       ))}
       <button
+        className="button-29"
         type="button"
         data-testid="All-category-filter"
         onClick={ () => changeRecipes(allButtonState) }

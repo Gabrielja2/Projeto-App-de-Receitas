@@ -31,7 +31,6 @@ describe('test the DoneRecipes page', () => {
         const allBtn = await screen.findByTestId("filter-by-all-btn");
         const Btn = await screen.findByTestId("0-horizontal-share-btn");
         userEvent.click(Btn);
-        await waitFor(() => expect(screen.findByTestId("oi")).toBeInTheDocument());
         userEvent.click(foodBtn);
         userEvent.click(drinkBtn);
         userEvent.click(allBtn);

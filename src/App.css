@@ -6,11 +6,14 @@
 .meals {
   align-items: center;
   background: white;
+  background-image: url('./images/back.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #464646;
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
-  height: 100vh;
+  height: 100%;
   justify-content: center;
   width: 100%;
 }
@@ -42,19 +45,9 @@
   font-weight: 900;
 }
 
-.footer {
-  bottom: 0;
-  position: fixed;
-  z-index: 10;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .card-img {
-  width: 30px;
+  border-radius: 15px;
+  width: 50%;
 }
 
 .main-container {
@@ -63,11 +56,18 @@
 }
 
 .recomendations-container {
+
+  /* -webkit-backdrop-filter: blur(10px); */
+  backdrop-filter: blur(10px);
+  background: rgba(13, 13, 13, 0.195);
+  border: 1px solid rgba(19, 19, 19, 0.18);
+  border-radius: 7px;
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 90px;
+  margin-top: 20px;
   overflow-x: scroll;
   scroll-behavior: smooth;
-  width: 60vw;
+  width: 70vw;
 }
 
 .recomendation-card {
@@ -82,12 +82,491 @@
 }
 
 .btn-footer {
+  background-color: rgb(81, 61, 61);
+  border: none;
+  border-radius: 10px;
   bottom: 0;
+  color: white;
+  font-size: 20px;
+  height: 50px;
+  left: calc(50% - 85px);
+  margin-bottom: 10px;
+  padding: 10px;
   position: fixed;
+}
+
+.btn-footer:hover {
+  background-color: white;
 }
 
 .cut {
   text-decoration: line-through;
+}
+
+/* LOGIN */
+.father {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 10%;
+  max-width: 300px;
+  min-height: 30vh;
+  min-width: 40vh;
+  text-align: center;
+}
+
+.bk-login {
+  height: 100vh;
+}
+
+.inputs-login {
+  background-color: white;
+  border: 3px solid rgba(255, 255, 255, 0.811);
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: currentcolor;
+  display: block;
+  margin-bottom: 10px;
+  padding: 6px;
+  width: 100%;
+}
+
+.button-form {
+  appearance: none;
+  background-color: black;
+  border-radius: 5px;
+  border-width: 0;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Lato , sans-serif;
+  font-weight: 500;
+  height: 35px;
+  letter-spacing: 0;
+  margin-top: 10px;
+  opacity: 1;
+  outline: 0;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: geometricprecision;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1)
+    background-color 100ms cubic-bezier(0.694, 0, 0.335, 1)
+    color 100ms cubic-bezier(0.694, 0, 0.335, 1);
+
+  /* -webkit-user-select: none; */
+  user-select: none;
+  vertical-align: baseline;
+  white-space: nowrap;
+  width: 90px;
+}
+
+/* HEADER */
+.header-father {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 300px;
+  min-height: 30vh;
+  min-width: 40vh;
+  text-align: center;
+}
+
+.h-btn {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-h {
+  align-items: center;
+  all: unset;
+  background: transparent;
+  border: none;
+  color: #f0f0f0;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  height: 30px;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  position: relative;
+  touch-action: manipulation;
+  user-select: none;
+
+  /* -webkit-user-select: none; */
+  white-space: nowrap;
+  width: 80px;
+  z-index: 1;
+}
+
+.btn-h:after, .btn-h:before {
+  bottom: 0;
+  content: '';
+  position: absolute;
+  right: 0;
+  transition: all 0.4s;
+  z-index: -99999;
+}
+
+.btn-h:before {
+  background: #ffe2e2;
+  border-radius: 10px;
+  height: 100%;
+  transform: translate(0%, 0%);
+  width: 100%;
+}
+
+.btn-h:after {
+  backdrop-filter: blur(5px);
+  background: #ffffff15;
+  border-radius: 50px;
+  height: 35px;
+  transform: translate(10px, 10px);
+  width: 35px;
+
+  /* -webkit-backdrop-filter: blur(5px); */
+}
+
+.btn-h:hover:before {
+  height: 110%;
+  transform: translate(5%, 20%);
+  width: 110%;
+}
+
+.btn-h:hover:after {
+  border-radius: 10px;
+  height: 100%;
+  transform: translate(0, 0);
+  width: 100%;
+}
+
+.btn-h:active:after {
+  transform: translate(0, 5%);
+  transition: 0s;
+}
+
+/* foodfilter  */
+.filters-father {
+  align-items: center;
+  color: white;
+  display: flex;
+
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.button-29 {
+  align-items: center;
+  appearance: none;
+  background-image: white;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px , rgba(45, 35, 66, 0.3) 0 7px 13px -3px
+    rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: JetBrains Mono , monospace;
+  font-size: 18px;
+  height: 35px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow 0.15s , transform 0.15s;
+  user-select: none;
+
+  /* -webkit-user-select: none; */
+  white-space: nowrap;
+  will-change: box-shadow , transform;
+}
+
+.button-29:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset , rgba(45, 35, 66, 0.4) 0 2px 4px
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px , black 0 -3px 0 inset;
+}
+
+.button-29:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px , #1b1a1a 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-29:active {
+  box-shadow: white 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+/* RECIPES */
+.cards {
+  padding-bottom: 30px;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.btn-cards {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.195);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px 0 rgba(248, 248, 248, 0.557);
+  color: white;
+  height: 22vh;
+  width: 30vh;
+
+  /* -webkit-backdrop-filter: blur(10px); */
+}
+
+/* footer */
+.footer {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 183, 183, 0.195);
+
+  /* -webkit-backdrop-filter: blur(10px); */
+  border: 1px solid rgba(19, 19, 19, 0.18);
+  border-radius: 7px;
+  bottom: 0;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+/* id */
+.white {
+  color: white;
+}
+
+.border {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.195);
+
+  /* -webkit-backdrop-filter: blur(10px); */
+  border: 1px solid rgba(19, 19, 19, 0.18);
+  border-radius: 7px;
+  padding: 20px;
+}
+
+.list-father {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  gap: 5px;
+  margin: 10px;
+}
+
+.list {
+  list-style: none;
+}
+
+.m-h {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  height: 15vw;
+  padding: 10px;
+  width: 35vw;
+}
+
+.instructions {
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.5);
+
+  /* -webkit-backdrop-filter: blur(10px); */
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 7px;
+  padding: 20px;
+}
+
+.video {
+  padding: 20px;
+}
+
+/* progress */
+.button-79 {
+  backface-visibility: hidden;
+  background: #d7d7d7;
+  border: 0;
+  border-radius: 0.375rem;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular , Helvetica , sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin: 10px 0;
+  padding: 1rem 1.25rem;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  touch-action: manipulation;
+  transform: translateZ(0) scale(1);
+  transition: transform 0.2s;
+  user-select: none;
+
+  /* -webkit-user-select: none; */
+}
+
+.button-79:disabled {
+  color: #787878;
+  cursor: auto;
+}
+
+.button-79:focus {
+  outline: 0 solid transparent;
+}
+
+.button-79:not( :disabled ):hover {
+  transform: scale(1.05);
+}
+
+.button-79:focus:not( :focus-visible ) {
+  outline: 0 solid transparent;
+}
+
+.button-79:not( :disabled ):active {
+  transform: translateY(0.125rem);
+}
+
+.button-79:not( :disabled ):hover:active {
+  transform: scale(1.05) translateY(0.125rem);
+}
+
+
+.button-79:focus:before {
+  border-width: 0.125rem;
+  content: '';
+  left: calc(-1 * 0.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1 * 0.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+
+/* done recipes */
+.filter-father {
+  display: flex;
+  gap: 5px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* PROFILE */
+.profile-father {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  gap: 20px;
+  justify-content: center;
+}
+
+.button-80 {
+  backface-visibility: hidden;
+  background: white;
+  border-radius: 0.375rem;
+  border-style: solid;
+  border-width: 0.125rem;
+  box-sizing: border-box;
+  color: #212121;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular , Helvetica , sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  padding: 0.875rem 1.125rem;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  touch-action: manipulation;
+  transform: translateZ(0) scale(1);
+  transition: transform 0.2s;
+  user-select: none;
+
+  /* -webkit-user-select: none; */
+}
+
+.button-80:focus {
+  outline: 0 solid transparent;
+}
+
+.button-80:not( :disabled ):hover {
+  transform: scale(1.05);
+}
+
+.button-80:focus:not( :focus-visible ) {
+  outline: 0 solid transparent;
+}
+
+.button-80:not( :disabled ):active {
+  transform: translateY(0.125rem);
+}
+
+.button-80:not( :disabled ):hover:active {
+  transform: scale(1.05) translateY(0.125rem);
+}
+
+
+.button-80:focus:before {
+  content: '';
+  left: calc(-1 * 0.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1 * 0.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+
+.button-80:focus:not( :focus-visible ):before {
+  border-width: 0;
 }
 
 @keyframes shake {

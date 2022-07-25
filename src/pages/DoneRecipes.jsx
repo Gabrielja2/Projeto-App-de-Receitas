@@ -1,8 +1,6 @@
-// import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-// import { DataContext } from '../context/DataContext';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
@@ -22,43 +20,48 @@ function DoneRecipes() {
   };
 
   const filter = (param) => {
-    const claudio = JSON.parse(localStorage.getItem('doneRecipes'));
+    const arrDone = JSON.parse(localStorage.getItem('doneRecipes'));
 
-    setArrRecipes(claudio && claudio.filter((e) => e.type === param));
+    setArrRecipes(arrDone && arrDone.filter((e) => e.type === param));
   };
 
   return (
     <>
       <Header title="Done Recipes" bool={ false } />
       {arrRecipes && (
-        <div>
-          <button
-            type="button"
-            data-testid="filter-by-all-btn"
-            onClick={ () => setArrRecipes(JSON.parse(localStorage
-              .getItem('doneRecipes'))) }
-          >
-            All
-          </button>
-          <button
-            type="button"
-            data-testid="filter-by-food-btn"
-            onClick={ () => filter('food') }
-          >
-            Foods
-          </button>
-          <button
-            type="button"
-            data-testid="filter-by-drink-btn"
-            onClick={ () => filter('drink') }
-          >
-            Drinks
-          </button>
+        <div className="father white">
+          <div className="filter-father">
+            <button
+              className="button-29"
+              type="button"
+              data-testid="filter-by-all-btn"
+              onClick={ () => setArrRecipes(JSON.parse(localStorage
+                .getItem('doneRecipes'))) }
+            >
+              All
+            </button>
+            <button
+              className="button-29"
+              type="button"
+              data-testid="filter-by-food-btn"
+              onClick={ () => filter('food') }
+            >
+              Foods
+            </button>
+            <button
+              className="button-29"
+              type="button"
+              data-testid="filter-by-drink-btn"
+              onClick={ () => filter('drink') }
+            >
+              Drinks
+            </button>
+          </div>
           {arrRecipes.map((e, i) => (
-            <div key={ i }>
+            <div className="gap" key={ i }>
               <Link to={ `/${e.type}s/${e.id}` }>
                 <img
-                  className="recomendation-card img"
+                  className="recomendation-card img border"
                   data-testid={ `${i}-horizontal-image` }
                   src={ e.image }
                   alt=""
@@ -72,6 +75,7 @@ function DoneRecipes() {
                 <h3 data-testid={ `${i}-horizontal-done-date` }>{e.doneDate}</h3>
               </Link>
               <button
+                className="button-29 width-btn"
                 type="button"
                 data-testid={ `${i}-horizontal-share-btn` }
                 onClick={ () => copyUrl(`${window.location.origin}/${e.type}s/${e.id}`) }

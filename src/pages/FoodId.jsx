@@ -71,24 +71,33 @@ function FoodId() {
 
   return (
     filteredById.length && (
-      <div>
+      <div className="father white">
         <img
-          className="card-img"
+          className="card-img border"
           src={ filteredById[0].strMealThumb }
           alt="imagem da receita"
           data-testid="recipe-photo"
         />
         <h1 data-testid="recipe-title">{filteredById[0].strMeal}</h1>
         <h3 data-testid="recipe-category">{filteredById[0].strCategory}</h3>
-        <ul>
+        <ul className="list-father">
           {ingredients.filter((item) => item !== '' && item !== null).map((e, i) => (
-            <li key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
+            <li
+              className="list"
+              key={ i }
+              data-testid={ `${i}-ingredient-name-and-measure` }
+            >
               {`${e} ${measures[i]}`}
             </li>
           ))}
         </ul>
-        <div>
-          <button type="button" data-testid="share-btn" onClick={ () => copyUrl() }>
+        <div className="m-h">
+          <button
+            className="button-29 m-h"
+            type="button"
+            data-testid="share-btn"
+            onClick={ () => copyUrl() }
+          >
             <img
               src={ shareIcon }
               alt="icone de perfil"
@@ -96,6 +105,7 @@ function FoodId() {
           </button>
           {copied && <span>Link copied!</span>}
           <button
+            className="button-29 m-h"
             type="button"
             data-testid="favorite-btn"
             onClick={ () => favoriteRecipe() }
@@ -107,9 +117,11 @@ function FoodId() {
             />
           </button>
         </div>
-        <p data-testid="instructions">{filteredById[0].strInstructions}</p>
+        <div className="instructions">
+          <h4 data-testid="instructions">{filteredById[0].strInstructions}</h4>
+        </div>
         <iframe
-          className="w-[560px] h-[315px] rounded-lg"
+          className="video"
           data-testid="video"
           src={ filteredById[0].strYoutube.replace('watch?v=', 'embed/') }
           frameBorder="0"

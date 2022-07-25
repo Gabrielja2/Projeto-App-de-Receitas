@@ -92,7 +92,7 @@ function RecipeInProgress() {
   const storedChecks = JSON.parse(localStorage.getItem('checks'));
   return (
     filteredById.length && (
-      <div>
+      <div className="father white">
         {verifyImg(url)}
         <img
           className="card-img"
@@ -101,8 +101,9 @@ function RecipeInProgress() {
           data-testid="recipe-photo"
         />
         <h1 data-testid="recipe-title">{favorited.name}</h1>
-        <div>
+        <div className="m-h">
           <button
+            className="button-29 m-h"
             type="button"
             data-testid="share-btn"
             onClick={ () => copyUrl() }
@@ -111,6 +112,7 @@ function RecipeInProgress() {
           </button>
           {copied && <span>Link copied!</span>}
           <button
+            className="button-29 m-h"
             type="button"
             data-testid="favorite-btn"
             onClick={ () => favoriteRecipe() }
@@ -123,7 +125,7 @@ function RecipeInProgress() {
           </button>
         </div>
         <h3 data-testid="recipe-category">{favorited.category}</h3>
-        <ul>
+        <ul className="list-father">
           {ingredients
             .filter((item) => item !== '' && item !== null)
             .map((e, i) => (
@@ -140,7 +142,7 @@ function RecipeInProgress() {
                 />
                 <li
                   className={
-                    storedChecks && storedChecks.includes(e) ? 'cut' : null
+                    storedChecks && storedChecks.includes(e) ? 'cut list' : 'list'
                   }
                 >
                   {e}
@@ -148,10 +150,13 @@ function RecipeInProgress() {
               </div>
             ))}
         </ul>
-        <p data-testid="instructions">{filteredById[0].strInstructions}</p>
+        <div className="instructions">
+          <h4 data-testid="instructions">{filteredById[0].strInstructions}</h4>
+        </div>
         <Link to="/done-recipes">
           <button
             type="button"
+            className="button-79"
             data-testid="finish-recipe-btn"
             disabled={ !arrChecks }
             onClick={ () => finishRecipes(currentArr) }

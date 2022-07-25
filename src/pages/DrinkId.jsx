@@ -88,9 +88,9 @@ function DrinkId() {
 
   return (
     filteredById.length && (
-      <div>
+      <div className="father white">
         <img
-          className="card-img"
+          className="card-img border"
           src={ filteredById[0].strDrinkThumb }
           alt="imagem da receita"
           data-testid="recipe-photo"
@@ -98,17 +98,22 @@ function DrinkId() {
         <h1 data-testid="recipe-title">{filteredById[0].strDrink}</h1>
         <h3 data-testid="recipe-category">{filteredById[0].strCategory}</h3>
         <h4 data-testid="recipe-category">{filteredById[0].strAlcoholic}</h4>
-        <ul>
+        <ul className="list-father">
           {ingredients
             .filter((item) => item !== '' && item !== null)
             .map((e, i) => (
-              <li key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
+              <li
+                className="list"
+                key={ i }
+                data-testid={ `${i}-ingredient-name-and-measure` }
+              >
                 {`${e} ${measures[i]}`}
               </li>
             ))}
         </ul>
-        <div>
+        <div className="m-h">
           <button
+            className="button-29 m-h"
             type="button"
             data-testid="share-btn"
             onClick={ () => copyUrl() }
@@ -117,6 +122,7 @@ function DrinkId() {
           </button>
           {copied && <span>Link copied!</span>}
           <button
+            className="button-29 m-h"
             type="button"
             data-testid="favorite-btn"
             onClick={ () => favoriteRecipe() }
@@ -128,7 +134,9 @@ function DrinkId() {
             />
           </button>
         </div>
-        <p data-testid="instructions">{filteredById[0].strInstructions}</p>
+        <div className="instructions">
+          <h4 data-testid="instructions">{filteredById[0].strInstructions}</h4>
+        </div>
         <div className="recomendations-container">
           {recomendation.length
             && recomendation.map((e, i) => (

@@ -33,9 +33,10 @@ function Login({ history }) {
   };
 
   return (
-    <div>
+    <div className="father bk-login">
       <form>
         <input
+          className="inputs-login"
           type="email"
           name="email"
           placeholder="Email"
@@ -43,6 +44,7 @@ function Login({ history }) {
           onChange={ ({ target }) => handleChange(target.value, target.name) }
         />
         <input
+          className="inputs-login"
           type="password"
           name="password"
           placeholder="Password"
