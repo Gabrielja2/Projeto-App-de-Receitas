@@ -26,7 +26,6 @@ function FoodId() {
     };
     doFetch();
     setId(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -38,7 +37,7 @@ function FoodId() {
       setRecomendations(json.drinks);
     };
     recomendationFetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, []);
 
   const copyUrl = () => {

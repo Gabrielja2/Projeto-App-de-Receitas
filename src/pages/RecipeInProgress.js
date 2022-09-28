@@ -81,7 +81,6 @@ function RecipeInProgress() {
     };
     progressFetch();
     setId(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const copyUrl = () => {

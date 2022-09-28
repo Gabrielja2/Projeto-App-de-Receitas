@@ -32,7 +32,6 @@ function Recipes({ food }) {
       setAllButtonState(json);
     };
     doFetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
