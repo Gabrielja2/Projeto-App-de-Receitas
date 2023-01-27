@@ -2,10 +2,8 @@
 
 
 <strong>👨‍💻 O que foi desenvolvido</strong><br />
-    Aqui você vai encontrar os detalhes de como foi estruturado este projeto e instruções para rodar.
-    
+    Aqui você vai encontrar os detalhes de como foi estruturado este projeto e instruções para rodar.    
     Essa aplicação é um app de receitas, utilizando o que há de mais moderno dentro do ecossistema React: Hooks e Context API!
-
     Nele é possível: ver, buscar, filtrar, favoritar e acompanhar o progresso de preparação de receitas e drinks!
 
 warning A base de dados serão 2 APIs distintas, uma para comidas e outra para bebidas.
