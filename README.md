@@ -11,6 +11,19 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
 
 <br />
 
+<details>
+  <summary><strong>:memo: Habilidades</strong></summary><br />
+
+  Nesse projeto, você será capaz de:
+
+  - Utilizar _Redux_ para gerenciar estado
+  - Utilizar a biblioteca _React-Redux_
+  - Utilizar a Context API do _React_ para gerenciar estado
+  - Utilizar o _React Hook useState_
+  - Utilizar o _React Hook useContext_
+  - Utilizar o _React Hook useEffect_
+  - Criar Hooks customizados
+</details>
 
 # Orientações
 
