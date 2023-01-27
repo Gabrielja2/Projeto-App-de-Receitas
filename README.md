@@ -14,7 +14,7 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
 <details>
   <summary><strong>:memo: Habilidades</strong></summary><br />
 
-  Nesse projeto, você será capaz de:
+  Esse projeto, reforçou diversas habilidades como:
 
   - Utilizar _Redux_ para gerenciar estado
   - Utilizar a biblioteca _React-Redux_
