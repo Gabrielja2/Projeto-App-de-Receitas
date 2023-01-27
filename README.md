@@ -112,3 +112,97 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
           }
         ```
       </details>
+    
+    Os ingredientes seguem uma ordem lógica onde o nome dele (<code>strIngredient1</code>) e a quantidade (<code>strMeasure1</code>) tem o mesmo número no final (1, nesse caso).
+
+      É possível listar todas as `categorias`, `nacionalidades` (vindas da API como "areas") e `ingredientes`:
+
+      ```
+      categorias: https://www.themealdb.com/api/json/v1/1/list.php?c=list
+      nacionalidades: https://www.themealdb.com/api/json/v1/1/list.php?a=list
+      ingredientes: https://www.themealdb.com/api/json/v1/1/list.php?i=list
+      ```
+
+      As fotos dos ingredientes vêm de um end-point padronizado com a seguinte lógica:
+
+      ```
+      https://www.themealdb.com/images/ingredients/{nome-do-ingrediente}-Small.png
+      // exemplo com "Lime"
+      https://www.themealdb.com/images/ingredients/Lime-Small.png
+      ```
+      </details>
+
+    * <details><summary><b> The CockTailDB API</b></summary>
+      Bem similar (inclusive mantida pela mesma entidade) a TheMealDB API, só que focado em bebidas.
+
+      Os end-points também são bastante ricos, você pode [vê-los aqui](https://www.thecocktaildb.com/api.php)
+
+      As respostas seguem a mesma estrutura, com algumas particularidades relativas às bebidas (como ser ou não alcoólica, por exemplo)
+
+        <details><summary><b>Ver modelo de resposta para drinks</b></summary>
+
+        ```json
+          {
+            "drinks":[
+                {
+                  "idDrink":"17256",
+                  "strDrink":"Martinez 2",
+                  "strDrinkAlternate":null,
+                  "strDrinkES":null,
+                  "strDrinkDE":null,
+                  "strDrinkFR":null,
+                  "strDrinkZH-HANS":null,
+                  "strDrinkZH-HANT":null,
+                  "strTags":null,
+                  "strVideo":null,
+                  "strCategory":"Cocktail",
+                  "strIBA":null,
+                  "strAlcoholic":"Alcoholic",
+                  "strGlass":"Cocktail glass",
+                  "strInstructions":"Add all ingredients to a mixing glass and fill with ice.\r\n\r\nStir until chilled, and strain into a chilled coupe glass.",
+                  "strInstructionsES":null,
+                  "strInstructionsDE":"Alle Zutaten in ein Mischglas geben und mit Eis f\u00fcllen. Bis zum Abk\u00fchlen umr\u00fchren und in ein gek\u00fchltes Coup\u00e9glas abseihen.",
+                  "strInstructionsFR":null,
+                  "strInstructionsZH-HANS":null,
+                  "strInstructionsZH-HANT":null,
+                  "strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/fs6kiq1513708455.jpg",
+                  "strIngredient1":"Gin",
+                  "strIngredient2":"Sweet Vermouth",
+                  "strIngredient3":"Maraschino Liqueur",
+                  "strIngredient4":"Angostura Bitters",
+                  "strIngredient5":null,
+                  "strIngredient6":null,
+                  "strIngredient7":null,
+                  "strIngredient8":null,
+                  "strIngredient9":null,
+                  "strIngredient10":null,
+                  "strIngredient11":null,
+                  "strIngredient12":null,
+                  "strIngredient13":null,
+                  "strIngredient14":null,
+                  "strIngredient15":null,
+                  "strMeasure1":"1 1\/2 oz",
+                  "strMeasure2":"1 1\/2 oz",
+                  "strMeasure3":"1 tsp",
+                  "strMeasure4":"2 dashes",
+                  "strMeasure5":null,
+                  "strMeasure6":null,
+                  "strMeasure7":null,
+                  "strMeasure8":null,
+                  "strMeasure9":null,
+                  "strMeasure10":null,
+                  "strMeasure11":null,
+                  "strMeasure12":null,
+                  "strMeasure13":null,
+                  "strMeasure14":null,
+                  "strMeasure15":null,
+                  "strCreativeCommonsConfirmed":"No",
+                  "dateModified":"2017-12-19 18:34:15"
+                }
+            ]
+          }
+        ```
+        </details>
+      Os ingredientes seguem uma ordem lógica onde o nome dele (<code>strIngredient1</code>) e a quantidade (<code>strMeasure1</code>) tem o mesmo número no final (1, nesse caso).
+      </details>
+    </details>
