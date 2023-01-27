@@ -28,37 +28,6 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
 # Orientações
 
 <details>
-  <summary><strong>🐋 Rodando no Docker vs Localmente</strong></summary><br />
-  
-  ## 👉 Com Docker
-
-> :information_source: Rode os serviços `node` e `db` com o comando `docker-compose up -d --build`.
-
-  - Lembre-se de parar o `mysql` se estiver usando localmente na porta padrão (`3306`), ou adapte, caso queria fazer uso da aplicação em containers;
-
-  - Esses serviços irão inicializar um container chamado `blogs_api` e outro chamado `blogs_api_db`;
-
-  - A partir daqui você pode rodar o container `blogs_api` via CLI ou abri-lo no VS Code;
-
-  > :information_source: Use o comando `docker exec -it blogs_api bash`.
-
-  - Ele te dará acesso ao terminal interativo do container criado pelo compose, que está rodando em segundo plano.
-
-  > :information_source: Instale as dependências [**Caso existam**] com `npm install`. (Instale dentro do container)
-
----
-  
-  ## 👉 Sem Docker
-  
-  > :information_source: Instale as dependências [**Caso existam**] com `npm install`
-    
-  - ✨ **Dica:** Para rodar o projeto desta forma, obrigatoriamente você deve ter o `node` instalado em seu computador.
-
-  <br />
-</details>
-
-
-<details>
 <summary><strong>Como ter acesso ao projeto e instalar as dependências</strong></summary><br />
 
     1. Entre na pasta do repositório que você acabou de clonar ou fazer o download do arquivo zip:
@@ -67,8 +36,8 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
     2. Instale as dependências:
     *`npm install`
 
-    3. Suba os imagens do servidor node e do banco de do docker-compose com o comando:
-    *`docker-compose up -d --build
+    3. Rode a aplicação com o comando:
+    *`npm start
     
     <br />
 </details>
