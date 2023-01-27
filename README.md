@@ -39,7 +39,6 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
     3. Rode a aplicação com o comando:
     *`npm start
     
-    <br />
 </details>
 
 
