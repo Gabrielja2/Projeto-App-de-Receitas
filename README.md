@@ -41,7 +41,7 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
     
 </details>
 
-* <details><summary><b> APIs :gear:</b></summary>
+ * <details><summary><b> APIs :gear:</b></summary>
 
     * <details><summary><b> TheMealDB API</b></summary>
 
@@ -113,7 +113,7 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
         ```
       </details>
     
-    Os ingredientes seguem uma ordem lógica onde o nome dele (<code>strIngredient1</code>) e a quantidade (<code>strMeasure1</code>) tem o mesmo número no final (1, nesse caso).
+      Os ingredientes seguem uma ordem lógica onde o nome dele (<code>strIngredient1</code>) e a quantidade (<code>strMeasure1</code>) tem o mesmo número no final (1, nesse caso).
 
       É possível listar todas as `categorias`, `nacionalidades` (vindas da API como "areas") e `ingredientes`:
 
