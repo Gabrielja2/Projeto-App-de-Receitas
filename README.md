@@ -41,7 +41,7 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
     
 </details>
 
-<details><summary><b> APIs :gear:</b></summary>
+* <details><summary><b> APIs :gear:</b></summary>
 
     * <details><summary><b> TheMealDB API</b></summary>
 
@@ -112,5 +112,3 @@ O layout tem como foco dispositivos móveis, dessa forma todos os protótipos v�
           }
         ```
       </details>
-
-
